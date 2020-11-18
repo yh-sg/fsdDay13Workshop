@@ -1,0 +1,37 @@
+<h1>ToDo</h1>
+<form [formGroup]="toDoForm" (ngSubmit)="processForm()">
+    <div>
+        Description
+        <input type="text" name="desc" id="desc" formControlName="desc">
+    </div>
+    <div>
+        Priority
+        <input type="radio" id="high" name="priority" value="High" formControlName="priority">
+        <label for="high">High</label>
+        <input type="radio" id="medium" name="priority" value="Medium" formControlName="priority">
+        <label for="medium">Medium</label>
+        <input type="radio" id="low" name="priority" value="Low" formControlName="priority">
+        <label for="low">Low</label>
+    </div>
+    <div>
+        Due:
+        <input type="date" name="date" id="date" formControlName="due">
+    </div>
+
+    <button type="submit" [disabled]="toDoForm.invalid">Add</button>
+</form>
+<br><br>
+
+    <div class="task">
+        <h1>Tasks</h1>
+        <div *ngFor="let i of task; let j = index ">
+            <div *ngIf="i.iscomplete==false">
+            <h3>Todo {{j+1}}: {{i.desc}}</h3>
+            <p>Priority: {{i.priority}}</p>
+            <p>Due Date: {{i.due}}</p>
+            <button type="button" (click)='onTodoComplete(j)'>Complete</button>
+            <button type="button" (click)='onTodoDelete(j)'>Delete</button>
+            <hr>
+            </div>
+        </div>
+    </div>
